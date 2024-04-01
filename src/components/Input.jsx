@@ -2,7 +2,7 @@ import React from "react";
 
 function Input({icon, placeholder, min, max, change}){
     return(
-		<div className="flex flex-wrap items-stretch mb-4 relative w-3/4 self-center">
+		<div className="flex flex-wrap items-stretch mb-4 relative w-full self-center">
 			<div className="flex -mr-px">
 				<span className="flex items-center leading-normal bg-transparent rounded rounded-r-none border border-r-0 border-grey-light px-3 whitespace-no-wrap text-grey-dark text-sm"><img src={"./public/icons/"+icon} className="w-8" alt="" srcSet="" /></span>
 			</div>	

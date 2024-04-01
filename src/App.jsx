@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Form from "./components/Form";
+import Dosis from "./components/Dose";
+import Header from "./components/Header";
 
 function App() {
   const [glucose, setGlucose] = useState(0);
@@ -26,18 +28,20 @@ function App() {
   }
 
 
+
   return (
-    <div id="main-container" className="h-screen w-screen mx-auto px-4 flex flex-col justify-center items-center min-w-600 bg-gradient-1">
-      <div id="container-calculate" className="container w-3/4 text-center my-auto text-2xl flex flex-col bg-blurry-material space-y-10 p-5 rounded-lg min-w-fit ">
+    <div id="main-container" className="h-screen w-screen mx-auto px-4 flex flex-col justify-center items-center bg-gradient-1">
+      <Header/>
+      <div id="container-calculate" className="container w-3/4 text-center my-auto text-2xl flex flex-col bg-blurry-material space-y-10 p-5 min-w-fit ">
         <h1 className="text-4xl font-bold">Calculadora de Insulina</h1>
         <Form submitFn={handleClickCalcular} changeGluc={handleChangeGluc} changeCarb={handleChangeCarb} />
-        <p><span className="font-semibold">Dosis recomendada : </span>{dosis? dosis + " u": "Ingrese datos"}</p>
       </div>
+        <Dosis dosis={dosis}/>
       <footer className="p-2">
         <p>@Facundo Maidana. Todos los derehos reservados</p>
       </footer>
     </div>
-  )
+)
 }
 
 export default App

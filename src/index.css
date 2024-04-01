@@ -4,6 +4,7 @@
 
 @layer base {
   .bg-blurry-material {
+    border-radius: 0.5rem;
     border: 1px solid black;
     box-shadow: 10px 10px 5px rgb(0, 26, 35, 0.2);
     background-size: 16px 16px;
