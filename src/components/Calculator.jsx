@@ -3,14 +3,15 @@ import { useState } from 'react';
 import Form from './Form'
 import Dosis from './Dose'
 
+
 function Calculator() {
   const [glucose, setGlucose] = useState(0);
   const [carb, setCarb] = useState(0);
   const [dosis, setDosis] = useState(0);
   
   function handleClickCalcular(e){
-    e.preventDefault();
-    calcularDosis(glucose, carb);
+      e.preventDefault();
+      calcularDosis(glucose, carb);
   }
 
   function handleChangeGluc(e){
@@ -33,7 +34,7 @@ function Calculator() {
         <h1 className="text-4xl font-bold">Calculadora de Insulina</h1>
         <Form submitFn={handleClickCalcular} changeGluc={handleChangeGluc} changeCarb={handleChangeCarb} />
       </div>
-        <Dosis dosis={dosis}/>
+        <Dosis glucosa={glucose} carbohidratos={carb} dosis={dosis}/> 
     </div>
   )
 }

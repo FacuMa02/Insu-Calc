@@ -1,16 +1,14 @@
 import React from "react";
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/react";
-
-
+import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell} from "@nextui-org/table";
 
 function Registro() {
   return (
     <div className='h-screen flex align-center justify-center'>
     <Table aria-label="Example static collection table">
       <TableHeader>
-        <TableColumn>NAME</TableColumn>
-        <TableColumn>ROLE</TableColumn>
-        <TableColumn>STATUS</TableColumn>
+        <TableColumn>GLUCOSA</TableColumn>
+        <TableColumn>CARBOHIDRATOS</TableColumn>
+        <TableColumn>INSULINA</TableColumn>
       </TableHeader>
       <TableBody>
         <TableRow key="1">
