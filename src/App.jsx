@@ -3,16 +3,17 @@ import MainLayout from "./layout/MainLayout";
 import Registro from "./components/Registros";
 import Calculator from "./components/Calculator";
 import Configuracion from "./components/Configuracion";
-
+import { useState } from 'react';
 import { NextUIProvider } from "@nextui-org/system";
 
 function App() {
+  
   return (
     <NextUIProvider>
    <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout/>}>
-              <Route path="/" index element={<Calculator/>}></Route>
+              <Route path="/" index element={<Calculator />}></Route>
               <Route path="/registros" index element={<Registro/>}></Route>
               <Route path="/configuracion" index element={<Configuracion/>}></Route>
           </Route>
@@ -22,7 +23,5 @@ function App() {
     )
 }
 
-export default App
+export default App;
 
-// background-color: #8EC5FC;
-// background-image: linear-gradient(65deg, #8EC5FC 0%, #E0C3FC 100%);

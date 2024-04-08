@@ -1,4 +1,5 @@
 let DB;
+
 export function crmDB() {
   //crear base de datos version 1.0
   let crmDB = window.indexedDB.open("crm", 1);
@@ -12,31 +13,42 @@ export function crmDB() {
   crmDB.onsuccess = () => {
     console.log("Base de datos creada");
     DB = crmDB.result;
+    const rs = obtenerConfiguracion();
+    console.log(rs);
   };
 
   //Configuracion de la base de datos
   crmDB.onupgradeneeded = (e) => {
     const db = e.target.result;
 
-    //crear la tabla
-    const objectStore = db.createObjectStore("crm", {
+    //crear la tabla de registros
+    const registros = db.createObjectStore("registros", {
       keyPath: "crm",
       autoIncrement: true,
     });
 
     //definir las columnas
-    objectStore.createIndex("glucosa", "glucosa", { unique: false });
-    objectStore.createIndex("carbohidratos", "carbohidratos", {
+    registros.createIndex("glucosa", "glucosa", { unique: false });
+    registros.createIndex("carbohidratos", "carbohidratos", {
       unique: false,
     });
-    objectStore.createIndex("insulina", "insulina", { unique: false });
+    registros.createIndex("insulina", "insulina", { unique: false });
 
-    console.log("Columnas creadas");
+    //crear la tabla de configuracion
+    const configuracion = db.createObjectStore("configuracion", {
+      autoIncrement: true,
+    });
+
+    configuracion.createIndex("ratio", "ratio", { unique: false });
+    configuracion.createIndex("glucIdeal", "glucIdeal", {
+      unique: false,
+    });
+    configuracion.createIndex("factor", "factor", { unique: false });
   };
 }
 
 export function crearRegistro(gluc, carb, insu) {
-  let transaction = DB.transaction(["crm"], "readwrite");
+  let transaction = DB.transaction(["registros"], "readwrite");
 
   transaction.oncomplete = function () {
     console.log("Transaccion completada");
@@ -46,7 +58,7 @@ export function crearRegistro(gluc, carb, insu) {
     console.log("Hubo un error en la transaccion");
   };
 
-  const objectStore = transaction.objectStore("crm");
+  const registros = transaction.objectStore("registros");
 
   const nuevoRegistro = {
     glucosa: gluc,
@@ -54,6 +66,46 @@ export function crearRegistro(gluc, carb, insu) {
     insulina: insu,
   };
 
-  const peticion = objectStore.add(nuevoRegistro);
+  registros.add(nuevoRegistro);
 }
+
+export function modificarConfiguracion(ratio, glucIdeal, factor) {
+  let transaction = DB.transaction(["configuracion"], "readwrite");
+
+  transaction.oncomplete = function () {
+    console.log("Configuracion modificada");
+  };
+
+  transaction.onerror = function () {
+    console.log("Hubo un error en la modificacion de configuracion");
+  };
+
+  const configuraciones = transaction.objectStore("configuracion");
+
+  const nuevaConfig = {
+    ratio: ratio,
+    glucIdeal: glucIdeal,
+    factor: factor,
+  };
+
+  configuraciones.put(nuevaConfig, 1);
+}
+
+export function obtenerRegistros() {}
+
+export function obtenerConfiguracion() {
+  const request = DB.transaction("configuracion")
+    .objectStore("configuracion")
+    .get(1);
+
+  request.onsuccess = () => {
+    const configuracion = request.result;
+    return configuracion;
+  };
+
+  request.onerror = function () {
+    console.log("Hubo un error en la transaccion obtenerCOnfiguracion");
+  };
+}
+
 crmDB();
