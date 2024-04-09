@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .bg-blurry-material {
+    border-radius: 1rem;
+    border: 1px solid black;
+    box-shadow: 10px 10px 5px rgb(0, 26, 35, 0.2);
+    background-size: 16px 16px;
+    backdrop-filter: blur(5px);
+  }
+  .bg-gradient-1 {
+    background-color: #8ec5fc;
+    background-image: linear-gradient(62deg, #8ec5fc 0%, #e0c3fc 100%);
+  }
+
+  .bg-landscape-1 {
+    background-image: url("/public/landscape.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+}
